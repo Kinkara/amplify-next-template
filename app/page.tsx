@@ -34,8 +34,12 @@ export default function App() {
     });
   }
 
-  return (
-        
+    
+  function deleteTodo(id: string) {
+    client.models.Todo.delete({ id })
+  }
+
+  return (    
     <Authenticator>
       {({ signOut, user }) => (
     <main>
@@ -43,6 +47,7 @@ export default function App() {
       <button onClick={createTodo}>+ new</button>
       <ul>
         {todos.map((todo) => (
+          onClick={() => deleteTodo(todo.id)}
           <li key={todo.id}>{todo.content}</li>
         ))}
       </ul>
@@ -55,6 +60,6 @@ export default function App() {
         </a>
       </div>
     </main>
-          </Authenticator>
+    </Authenticator>
   );
 }
