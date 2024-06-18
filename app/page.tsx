@@ -1,5 +1,8 @@
 "use client";
 
+
+import { Authenticator } from '@aws-amplify/ui-react'
+import '@aws-amplify/ui-react/styles.css'
 import { useState, useEffect } from "react";
 import { generateClient } from "aws-amplify/data";
 import type { Schema } from "@/amplify/data/resource";
@@ -32,6 +35,9 @@ export default function App() {
   }
 
   return (
+        
+    <Authenticator>
+      {({ signOut, user }) => (
     <main>
       <h1>My todos</h1>
       <button onClick={createTodo}>+ new</button>
@@ -40,6 +46,7 @@ export default function App() {
           <li key={todo.id}>{todo.content}</li>
         ))}
       </ul>
+      <button onClick={signOut}>Sign out</button>
       <div>
         🥳 App successfully hosted. Try creating a new todo.
         <br />
@@ -48,5 +55,6 @@ export default function App() {
         </a>
       </div>
     </main>
+          </Authenticator>
   );
 }
